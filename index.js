@@ -60,6 +60,7 @@ class Calculator {
                 return;
         }
 
+        this.checkAll();
         this.currentOperand = result;
         this.operation = undefined;
         this.previousOperand = calculation;
@@ -87,12 +88,15 @@ class Calculator {
         }
     }
 
-    check() {
-        if (this.operation !== null) {
-            return;
+    checkAll() {
+        if (
+            this.operation == null &&
+            this.previousOperand !== "" &&
+            this.currentOperand !== ""
+        ) {
+            this.currentOperand = "";
+            this.previousOperand = "";
         }
-
-        this.clear();
     }
 
     updateDisplay() {
@@ -143,7 +147,7 @@ operationButtons.forEach((button) => {
 equalsButton.addEventListener("click", () => {
     calculator.compute();
     calculator.updateDisplay();
-    calculator.check();
+    calculator.checkAll();
 });
 
 deleteButton.addEventListener("click", () => {
